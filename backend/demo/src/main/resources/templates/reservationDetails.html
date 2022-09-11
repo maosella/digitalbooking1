@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservation</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    />
+  </head>
+  <body
+    style="
+      background-color: white;
+      font-family: Quicksand, 'Trebuchet MS', Verdana;
+      align-items: flex-start;
+      width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    "
+  >
+    <img style="height: 40px; border-radius: 5px" src="https://doom-bucket-g5.s3.us-east-2.amazonaws.com/mainLogo.webp" alt="" />
+    <h2 style="margin-bottom: 0px; margin-top: 10px; color: black">
+      Tu reserva está confirmada
+    </h2>
+    <p style="margin-top: 7px; font-weight: 500; color: black">Tu destino es <span th:text="${city}"></span></p>
+    <img
+      style="width: 100%"
+      th:src="${img}"
+      alt=""
+    />
+    <p style="font-weight: 600; color: black">
+      Gracias por reservar su estadia en <span th:text="${product}"></span> con nosotros.
+    </p>
+    <p
+      style="
+        width: 100%;
+        border-bottom: 1px;
+        border-top: 1px;
+        border-left: 0px;
+        border-right: 0px;
+        border-color: lightgray;
+        border-style: solid;
+        margin: 0px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: black;
+      "
+    >
+      A continuacion estan los detalles de su reserva.
+    </p>
+    <div
+      style="
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: top;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: 1px;
+        border-color: lightgray;
+        border-style: solid;
+        padding-bottom: 8px;
+        padding-top: 3px;
+        color: black;
+      "
+    >
+      <div style="width: 27%">
+        <h4 style="margin-bottom: 0px; margin-top: 15px; color: black"><span th:text="${startDate}"></span></h4>
+        <p
+          style="
+            font-size: small;
+            font-weight: 500;
+            text-align: left;
+            margin-top: 10px;
+            color: black;
+          "
+        >
+          Check In: <span th:text="${checkin}"></span>
+        </p>
+      </div>
+      <p style="margin-top: 15px; width: 46%; text-align: center">----------------</p>
+      <div style="width: 27%">
+        <h4 style="margin-bottom: 0px; margin-top: 15px; text-align: right">
+          <span th:text="${endDate}"></span>
+        </h4>
+        <p
+          style="
+            font-size: small;
+            font-weight: 500;
+            text-align: right;
+            margin-top: 10px;
+          "
+        >
+          Check Out: <span th:text="${checkout}"></span>
+        </p>
+      </div>
+    </div>
+    <div
+      style="
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+      "
+    >
+      <h4 style="margin-bottom: 10px; margin-top: 10px; color: black; width: 50%">Dirección</h4>
+      <a
+        style="text-decoration: none; color: #f0572d; text-align: right; width: 50%; font-weight: 700; padding-top: 10px"
+        th:href="${location}"
+        >Ver en Mapa</a
+      >
+    </div>
+    <p
+      style="
+        width: 100%;
+        margin-top: 2px;
+        padding-bottom: 25px;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: 1px;
+        border-color: lightgray;
+        border-style: solid;
+        margin-bottom: 0px;
+        color: black;
+      "
+    >
+      <span th:text="${address}"></span>
+    </p>
+    <div
+      style="
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+        padding-bottom: 10px;
+        border-top: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        border-bottom: 1px;
+        border-color: lightgray;
+        border-style: solid;
+      "
+    >
+      <h4 style="margin-bottom: 10px; margin-top: 10px; width: 50%">Código de Reserva</h4>
+      <p
+        style="
+          text-decoration: none;
+          font-weight: 500;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          width: 50%;
+          text-align: right;
+        "
+        th:text="${rsv}"
+      >
+        RSV{id}
+      </p>
+    </div>
+    <div style="width: 100%">
+    <button
+      style="
+        width: 60%;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #f0572d;
+        font-family: Quicksand, 'Trebuchet MS', Verdana;
+        font-weight: 700;
+        font-size: medium;
+        margin-left: 80px;
+        margin-top: 27px;
+        align-self: center;
+      "
+    >
+      <a
+        style="padding: 10px; color: white; text-decoration: none"
+        th:href="${productUrl}"
+        >Detalles del Alojamiento</a
+      >
+    </button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+image:
+  name: registry.gitlab.com/gitlab-org/terraform-images/stable:latest
+
+variables: 
+  TF_ROOT: ${CI_PROJECT_DIR}/infra 
+  TF_STATE_NAME: ${TF_STATE_NAME: -default}
+
+stages:
+  - format
+  - validate
+  - build
+  - deploy
+  - cleanup
+
+cache:
+  key: "${TF_ROOT}"
+  paths:
+    - $${TF_ROOT}/.terraform/
+
+.terraform:fmt: &terraform_fmt
+  stage: format
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform fmt
+  
+.terraform:build: &terraform_build
+  stage: build
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform plan
+    - gitlab-terraform plan-json
+  resource_group: ${TF_STATE_NAME}
+  artifacts:
+    paths:
+      - ${TF_ROOT}/plan.cache
+    reports:
+      terraform: ${TF_ROOT}/plan.json
+
+.terraform:deploy: &terraform_deploy
+  stage: deploy
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform apply
+  resource_group: ${TF_STATE_NAME}
+  rules:
+    - when: manual
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+.terraform:destroy: &terraform_destroy
+  stage: cleanup
+  script:
+    - cd "${TF_ROOT}"
+    - gitlab-terraform destroy
+  resource_group: ${TF_STATE_NAME}
+  when: manual
+  allow_failure: true

@@ -1,0 +1,15 @@
+{
+  "Version": "2012-10-17",
+  "Id": "S3-Console-Auto-Gen-Policy-1654486569913",
+  "Statement": [
+    {
+      "Sid": "InventoryAndAnalyticsExamplePolicy",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": "s3:getObject",
+      "Resource": "arn:aws:s3:::doom-bucket-g5/images/*"
+    }
+  ]
+}

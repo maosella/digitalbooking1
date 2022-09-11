@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+abbr {
+  @apply
+  no-underline
+}
+
+.react-calendar {
+  @apply
+   border-none
+   rounded-[5px]
+   drop-shadow-xl
+   font-quicksand
+   py-5
+   px-4
+   leading-none
+   w-full
+}
+
+.full-width {
+  @apply
+  w-full
+}
+
+.two-thirds-width {
+  @apply
+  w-2/3
+}
+
+.not-available {
+  @apply
+  text-slate-400
+  line-through
+}
+
+.react-calendar__tile {
+  @apply
+  text-sm
+  font-semibold
+  p-2.5
+  rounded-md
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  @apply
+  bg-primary
+  text-white
+}
+
+.react-calendar__tile.react-calendar__tile--active.react-calendar__tile--range {
+  @apply 
+  bg-primary
+  text-white 
+  rounded-md;
+}
+
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+  @apply
+  bg-neutral
+}
+
+.react-calendar__tile:disabled {
+  @apply
+  bg-white
+}
+
+.react-calendar__viewContainer {
+  @apply
+  divide-x divide-slate-500
+}
+
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  @apply
+  m-0
+}
+
+.react-calendar__month-view {
+  @apply
+  py-2
+  px-7
+  m-0
+}
+
+.react-calendar__month-view__weekdays {
+  @apply
+  text-sm
+  text-primary
+}
+
+.react-calendar__navigation {
+  @apply
+  text-base
+  m-0
+  px-6
+}
+
+.react-calendar__navigation__label {
+  @apply
+  flex justify-evenly items-center
+  font-bold
+  divide-x divide-slate-500
+}
+
+.react-calendar__navigation__label__labelText {
+  @apply
+  pt-2.5
+  w-1/2
+  h-full
+  capitalize
+}
+
+
+.react-calendar__navigation__label__divider {
+  @apply
+  hidden
+}
+
+.react-calendar__navigation__arrow {
+  @apply
+  text-xl
+  text-gray-500
+  font-semibold
+}
+
+.react-calendar__navigation button:active {
+  @apply
+  active:bg-white
+}
+
+.react-calendar__navigation button:enabled:focus {
+  @apply
+  bg-white
+}
+
+.react-calendar__navigation button:enabled:hover {
+  @apply
+  font-bold
+  hover:bg-white
+}
+
+.two-thirds-width .react-calendar {
+  @apply
+  relative
+  px-20
+}
+
+.two-thirds-width .react-calendar__navigation__arrow {
+  @apply
+  z-10
+  origin-center top-1/2 -translate-y-1/2
+  absolute
+  bg-primary
+  text-white
+  rounded-full
+  p-1
+  text-3xl
+  font-normal
+  mx-6
+}
+
+.two-thirds-width .react-calendar__navigation {
+  @apply
+  static
+  px-0
+}
+
+
+.two-thirds-width .react-calendar__navigation__prev-button {
+  @apply
+  left-0
+}
+
+.two-thirds-width .react-calendar__navigation__next-button {
+  @apply
+  right-0
+}
+
+.two-thirds-width  .react-calendar__navigation button:active.react-calendar__navigation__arrow  {
+  @apply
+  active:bg-primary
+  
+}
+
+.two-thirds-width  .react-calendar__navigation button:enabled:focus.react-calendar__navigation__arrow  {
+  @apply
+  bg-primary
+}
+
+.two-thirds-width  .react-calendar__navigation button:enabled:hover.react-calendar__navigation__arrow  {
+  @apply
+  font-bold
+  hover:bg-primary
+  hover:scale-[1.05]
+  ease-in-out 
+  transition-all
+}

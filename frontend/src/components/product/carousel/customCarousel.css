@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-carousel-styles {
+  @apply bg-primary h-10 w-10 rounded-full flex items-center justify-center absolute top-[40%];
+}
+.carousel .control-next.control-arrow,
+.carousel .control-next.control-arrow:hover {
+  @apply custom-carousel-styles right-2;
+}
+.carousel .control-prev.control-arrow,
+.carousel .control-prev.control-arrow:hover {
+  @apply custom-carousel-styles left-2;
+}
+
+.carousel .thumbs-wrapper button.control-arrow.control-prev,
+.carousel .thumbs-wrapper button.control-arrow.control-next {
+  @apply hidden;
+}
+.carousel .control-next.control-arrow:before,
+.carousel .control-prev.control-arrow:before {
+  content: '';
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 5px;
+}
+.carousel .control-next.control-arrow:before {
+  @apply mr-[10px] -rotate-45;
+}
+
+.carousel .control-prev.control-arrow:before {
+  @apply ml-[10px] rotate-[135deg];
+}
+
+.slide img {
+  @apply rounded-t-lg h-[400px] object-cover; 
+}
+.thumbs-wrapper{
+    @apply pt-3 
+}
+.thumb{
+  @apply rounded-lg 
+}
+li.thumb img{
+  @apply rounded-lg m-0 h-14 object-cover
+}
+
+p.carousel-status {
+  @apply  translate-y-full h-full scale-[2] mt-36 mr-5
+}
+
+

@@ -1,0 +1,66 @@
+stages:
+  - build
+  - test
+  - deploy
+
+before_script:
+  - cd frontend
+
+cache:
+  paths:
+    - frontend/node_modules/
+
+build website:
+  image: node:16-alpine3.15
+  stage: build
+  script:
+    - CI=false npm install --legacy-peer-deps
+    # - npm lint
+    # - npm test
+    - CI=false npm run build
+  artifacts:
+    name: deploy
+    paths:
+      - frontend/build
+
+.test website:
+  image: node:16-alpine3.15
+  stage: test
+  script:
+    - npm global add serve
+    - apk add curl
+    - serve -s build &
+    - sleep 10
+    # - curl http://localhost:3000 | grep "React App"
+# deploy to s3:
+#   stage: deploy
+#   image: 
+#     name: amazon/aws-cli:2.4.11
+#     entrypoint: [""]
+#   script:
+#     - aws --version
+#     # - echo "Hello S3 GDMF" > test.txt
+#     - aws s3 sync build s3://$AWS_S3_BUCKET --delete
+
+deploy_dev_front:
+    stage: deploy
+    image: alpine:3.16
+    before_script:
+        - apk update && apk add openssh-client bash
+        - apk add zip
+        - mkdir -p ~/.ssh
+        - eval $(ssh-agent -s)
+        - echo "$SERVER_DEV_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - touch ~/.ssh/config
+        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        - ssh-keyscan -H $SERVER_DEV_IP >> ~/.ssh/known_hosts
+        - cd frontend/build/ && zip -r deploy.zip ./*
+    script:
+        - ssh ubuntu@$SERVER_DEV_IP "sudo systemctl stop nginx.service"
+        - scp deploy.zip ubuntu@$SERVER_DEV_IP:~/front-deploy/app/
+        - ssh ubuntu@$SERVER_DEV_IP "cd /usr/share/nginx/html/app/ && sudo rm -rf *"
+        - ssh ubuntu@$SERVER_DEV_IP "sudo unzip ~/front-deploy/app/deploy.zip -d /usr/share/nginx/html/app/"
+        - ssh ubuntu@$SERVER_DEV_IP "sudo systemctl start nginx.service"
+
+
+

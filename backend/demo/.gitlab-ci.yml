@@ -1,0 +1,52 @@
+stages:
+    - build
+    - test
+    - package
+    - deploy
+
+
+cache:
+  paths:
+    - .m2/repository
+
+variables:
+    MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+    MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+
+.build_job:
+    stage: build
+    before_script: pwd | cd backend/demo/
+    script:
+        - mvn --file backend/demo/ compile
+        - echo "Se compiló correctamente..."
+
+.test_job:
+    stage: test
+    script:
+        - mvn --file backend/demo/ clean test
+
+package_job:
+    stage: package
+    script:
+        - mvn --file backend/demo/ package
+    artifacts:
+        paths:
+            - backend/demo/target/
+
+deploy_server_dev:
+    stage: deploy
+    image: alpine:3.16
+    before_script:
+        - apk update && apk add openssh-client bash
+        - mkdir -p ~/.ssh
+        - eval $(ssh-agent -s)
+        - echo "$SERVER_DEV_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - touch ~/.ssh/config
+        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        - ssh-keyscan -H $SERVER_DEV_IP >> ~/.ssh/known_hosts
+    script:
+        - ssh ubuntu@$SERVER_DEV_IP "sudo systemctl stop appBooking.service"
+        - scp ./backend/demo/target/demo-0.0.1-SNAPSHOT.jar ubuntu@$SERVER_DEV_IP:~/deploy-app/appBooking.jar
+        - ssh ubuntu@$SERVER_DEV_IP "sudo systemctl start appBooking.service"
+
+

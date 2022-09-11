@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+::-webkit-scrollbar {
+    width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FF0000;
+}
+  body {
+    @apply font-quicksand;
+  }
+}
+
+@layer components {
+  .flex-col-center {
+    @apply flex flex-col justify-center items-center;
+  }
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .btn-primary {
+    @apply 
+    py-3 
+    rounded-xl 
+  bg-primary 
+  text-white
+    text-lg 
+    font-bold
+    active:scale-[.98]
+    active:duration-75 
+    hover:scale-[1.01]
+    ease-in-out 
+    transition-all ;
+  }
+  .btn-secondary {
+    @apply flex-center
+    py-2 px-4
+    border-2
+    border-primary
+    rounded-md
+    bg-white
+    cursor-pointer
+    text-primary
+    font-bold
+    active:scale-[.98]
+    active:duration-75 
+    hover:scale-[1.01]
+    ease-in-out 
+    transition-all ;
+  }
+}

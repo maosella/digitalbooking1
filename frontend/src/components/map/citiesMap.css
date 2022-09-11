@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.leaflet-container {
+    @apply
+    rounded-md
+    h-96
+    z-0
+}
+
+input {
+    @apply
+    bg-white
+}

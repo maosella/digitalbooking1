@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Validate</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Verdana:wght@300;400;500;600;700&display=swap"
+      type="text/css"
+    />
+  </head>
+  <body>
+  <div style="width:350px;margin-left: auto;
+        margin-right: auto;">
+  <img style="height: 40px; border-radius: 5px" src="https://doom-bucket-g5.s3.us-east-2.amazonaws.com/mainLogo.webp" alt="" />
+  <div
+      style="
+        background-color: white;
+        color: black;
+        align-items: center;
+        font-family: Quicksand, 'Trebuchet MS', Verdana;
+        text-align: center;
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 5px;
+      "
+    >
+      <h1>¡Gracias por Registrarte!</h1>
+      <h2>Hola,<span th:text="${name}"></span></h2>
+      <p style="margin-bottom: 20px">
+        Por favor clickea en el siguiente boton para confirmar tu cuenta.
+      </p>
+      <button
+        style="
+          width: 50%;
+          border: none;
+          padding: 10px;
+          border-radius: 5px;
+          background-color: #f0572d;
+          font-family: Quicksand, 'Trebuchet MS', Verdana;
+          font-weight: 700;
+          font-size: medium;
+        "
+      >
+        <a
+          style="padding: 10px; color: white; text-decoration: none"
+          th:href="${urlValidation}"
+          >Confirmar</a
+        >
+      </button>
+    </div>
+  </div>
+  </body>
+</html>

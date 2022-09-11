@@ -1,0 +1,18 @@
+ui:
+  trigger:
+    include:
+      - local: frontend/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - changes: [frontend/**/**]
+    - when: manual 
+   
+backend:
+  trigger:
+    include:
+      - local: backend/demo/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - changes: [backend/**/**]
+    - when: manual
+

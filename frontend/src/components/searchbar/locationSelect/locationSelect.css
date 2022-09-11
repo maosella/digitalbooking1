@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.css-qc6sy-singleValue div {
+  @apply flex 
+  items-center 
+  gap-2 
+  border-none
+  h-9 
+  cursor-pointer outline-none;
+}
+.css-1okebmr-indicatorSeparator,
+.css-1hb7zxy-IndicatorsContainer,
+.css-tlfecz-indicatorContainer,
+.css-tlfecz-indicatorContainer svg {
+  @apply hidden 
+  opacity-0 
+  cursor-pointer;
+}
+
+.css-6j8wv5-Input {
+  @apply cursor-pointer;
+}

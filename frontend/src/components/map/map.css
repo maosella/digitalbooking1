@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.leaflet-container {
+    @apply
+    h-96
+    rounded-md
+    z-0
+}
